@@ -3,9 +3,11 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Hacker News</title>
+    <title>Hacker News Live</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="news.css" />
+    <!-- for date parsing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script>
     <!-- development version, includes helpful console warnings -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <!-- production version, optimized for size and speed -->
@@ -40,14 +42,18 @@
                                 <td style="line-height:12pt; height:10px;">
                                     <span class="pagetop">
                                         <b class="hnname">
-                                            <a href="news">Hacker News</a>
+                                            <a href="/">Hacker News
+                                            </a>
+                                            <a href="https://github.com/weaversam8/hackernews_live">
+                                                <u>Live</u>
+                                            </a>
                                         </b>
-                                        <a href="newest">new</a> |
+                                        <!-- <a href="newest">new</a> |
                                         <a href="newcomments">comments</a> |
                                         <a href="show">show</a> |
                                         <a href="ask">ask</a> |
                                         <a href="jobs">jobs</a> |
-                                        <a href="submit">submit</a>
+                                        <a href="submit">submit</a> -->
                                     </span>
                                 </td>
                                 <!-- Login link -->
@@ -107,6 +113,17 @@
                                 <a href="http://www.ycombinator.com/apply/">Apply to YC</a>
                                 |
                                 <a href="mailto:hn@ycombinator.com">Contact</a>
+                            </span>
+                            <br>
+                            <br>
+                            <span class="yclinks">
+                                This project is not affilliated with YCombinator. Unapologetically based off of
+                                <a href="https://news.ycombinator.com">
+                                    <u>Hacker News</u>
+                                </a>. Source code available
+                                <a href="https://github.com/weaversam8/hackernews_live">
+                                    <u>here</u>
+                                </a>.
                             </span>
                             <br>
                             <br>
