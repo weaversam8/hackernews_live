@@ -5,6 +5,21 @@ window.db = firebase.database().ref("v0");
 // by the way this is hideous and gross and I know.
 Vue.component("news-item", {
   props: ["item", "index"],
+  created: function() {
+    // in this we fetch the data based off the ID passed to the item
+
+    window.db
+      .child("item")
+      .child(this.item.id)
+      .once("value")
+      .then(
+        function(fbItem) {
+          let data = fbItem.val();
+          this.item.title = data.title;
+          console.log(this);
+        }.bind(this)
+      );
+  },
   template:
     "<div>" +
     "<!-- Item title line -->" +
@@ -49,17 +64,27 @@ Vue.component("news-item", {
 window.App = new Vue({
   el: "#app",
   data: {
-    items: [
-      {
-        title: "Test",
-        id: 123,
-        rank: 1,
-        domain: "example.com",
-        age: "0 minutes ago",
-        username: "AlphaWeaver",
-        commentCount: 999,
-        pointCount: 999
-      }
-    ]
+    items: []
   }
 });
+
+window.bestStoriesUpdated = function(stories) {
+  stories = stories.slice(0, 30);
+  stories = stories.map(story => {
+    return {
+      title: "Test Title",
+      id: story,
+      domain: "example.com",
+      age: "0 minutes ago",
+      username: "AlphaWeaver",
+      commentCount: story,
+      pointCount: 999
+    };
+  });
+
+  window.App.items = stories;
+};
+
+window.db
+  .child("topstories")
+  .on("value", best => bestStoriesUpdated(best.val()));
