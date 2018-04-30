@@ -13,18 +13,18 @@
                     <td style="line-height:12pt; height:10px;">
                         <span class="pagetop">
                             <b class="hnname">
-                                <a href="/">Hacker News
-                                </a>
+                                <router-link to="/">Hacker News
+                                </router-link>
                                 <a href="https://github.com/weaversam8/hackernews_live">
                                     <u>Live</u>
                                 </a>
                             </b>
-                            <!-- <a href="newest">new</a> |
-                                        <a href="newcomments">comments</a> |
-                                        <a href="show">show</a> |
-                                        <a href="ask">ask</a> |
-                                        <a href="jobs">jobs</a> |
-                                        <a href="submit">submit</a> -->
+                            <router-link to="/newest">new</router-link> |
+                                        <!-- <a href="newcomments">comments</a> | -->
+                                        <router-link to="/show">show</router-link> |
+                                        <router-link to="/ask">ask</router-link> |
+                                        <router-link to="/jobs">jobs</router-link>
+                                        <!-- <a href="submit">submit</a> -->
                         </span>
                     </td>
                     <!-- Login link -->

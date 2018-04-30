@@ -11,7 +11,7 @@
 <body>
     <center>
         <div id="app">
-            <live-news type="topstories"></live-news>
+            <router-view :key="$route.fullPath"></router-view>
         </div>
     </center>
     <script src="dist/app.js"></script>
