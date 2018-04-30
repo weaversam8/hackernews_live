@@ -1,8 +1,19 @@
+// import modules
+import moment from "moment";
+import Vue from "vue";
+import * as firebase from "firebase";
+import { CSSPlugin, EasePack, TweenLite } from "gsap";
+
+// initialize the firebase app
+firebase.initializeApp({
+  databaseURL: "https://hacker-news.firebaseio.com"
+});
+
 // initialize the database
 window.db = firebase.database().ref("v0");
 
 // make libraries available
-Vue.prototype.moment = window.moment;
+Vue.prototype.moment = moment;
 
 window.extractHostname = function(url) {
   var hostname;

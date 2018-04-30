@@ -6,24 +6,6 @@
     <title>Hacker News Live</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="news.css" />
-    <!-- for date parsing -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.1/moment.min.js"></script>
-    <!-- for animations -->
-    <!-- CDN links for TweenLite, CSSPlugin, and EasePack -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/plugins/CSSPlugin.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/easing/EasePack.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.3/TweenLite.min.js"></script>
-    <!-- vue development version, includes helpful console warnings -->
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <!-- firebase, for connecting to the HN API -->
-    <script src="https://www.gstatic.com/firebasejs/4.13.0/firebase.js"></script>
-    <!-- initialize firebase -->
-    <script>
-        // Initialize Firebase
-        firebase.initializeApp({
-            databaseURL: 'https://hacker-news.firebaseio.com'
-        });
-    </script>
 </head>
 
 <body>
@@ -139,7 +121,7 @@
             </table>
         </div>
     </center>
-    <script src="app.js"></script>
+    <script src="dist/app.js"></script>
 </body>
 
 </html>
