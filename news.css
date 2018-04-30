@@ -1,3 +1,8 @@
+/* Custom styles added */
+.flip-list-move {
+  transition: transform 1s;
+}
+
 /* From https://news.ycombinator.com/news.css */
 
 body {
