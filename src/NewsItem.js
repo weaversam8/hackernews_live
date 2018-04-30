@@ -1,47 +1,28 @@
 import Vue from "vue";
+import moment from "moment";
 import * as firebase from "firebase";
 import { CSSPlugin, EasePack, TweenLite } from "gsap";
+import * as tldjs from "tldjs";
 
 const storyUpdateFunction = function(fbItem) {
   console.log("Story #" + this.item.id + " updated.");
+
+  // extract the data from the firebase object
   let data = fbItem.val();
-  // console.log(data);
+
+  // these are used to animate the vote and comment buttons
   this.grayscale = 1;
+  this.grayscaleComments = 0.9;
 
-  if (this.item.pointCount != data.score) {
-    this.grayscale = 0;
-    // console.log("  Points Updated");
-    TweenLite.to(this, 1, {
-      grayscale: 1.0,
-      onUpdate: function() {
-        // console.log(this.grayscale);
-        this.$forceUpdate();
-      }.bind(this)
-    });
-    // console.log("  Post-tween.");
-  }
-
+  // copy in the relevant information
   this.item.title = data.title;
   this.item.pointCount = data.score;
-
-  this.grayscaleComments = 0.9;
-  if (this.item.commentCount != data.descendants) {
-    this.grayscaleComments = 0;
-    // console.log("  Comments Updated");
-    TweenLite.to(this, 1, {
-      grayscaleComments: 0.9,
-      onUpdate: function() {
-        // console.log(this.grayscaleComments);
-        this.$forceUpdate();
-      }.bind(this)
-    });
-    // console.log("  Post-tween.");
-  }
   this.item.commentCount = data.descendants;
   this.item.commentText =
     data.descendants == 0 ? "discuss" : data.descendants + " comments";
   this.item.username = data.by;
   this.item.time = new Date(1000 * data.time);
+  this.ageHuman = moment(this.item.time).fromNow();
   this.item.story = data.type == "story";
   this.item.href = data.url;
 
@@ -82,23 +63,35 @@ const newsUnloadFunction = function() {
 export default {
   props: ["item", "index"],
   created: newsLoadFunction,
-  beforeDestroy: newsUnloadFunction
-  //   watch: {
-  //     "item.pointCount": function(newValue) {
-  //       console.log("votesupdated");
-  //       console.log(this);
-  //       this.grayscale = 0;
-  //       // tween
-  //       TweenLite.to(this, 1, { grayscale: 1 });
-  //     },
-  //     "item.commentText": function(newValue) {
-  //       console.log("commentsupdated");
-  //       console.log(this);
-  //       this.grayscaleComments = 0;
-  //       // tween
-  //       TweenLite.to(this, 1, {
-  //         grayscaleComments: 0.9
-  //       });
-  //     }
-  //   }
+  beforeDestroy: newsUnloadFunction,
+  computed: {
+    domain: function() {
+      return tldjs.parse(this.item.href).domain;
+    }
+  },
+  watch: {
+    "item.pointCount": function(newValue) {
+      this.grayscale = 0;
+      // tween
+      TweenLite.to(this, 1, {
+        grayscale: 1.0,
+        onUpdate: function() {
+          this.$forceUpdate();
+        }.bind(this)
+      });
+    },
+    "item.commentText": function(newValue) {
+      this.grayscaleComments = 0;
+      // tween
+      TweenLite.to(this, 1, {
+        grayscaleComments: 0.9,
+        onUpdate: function() {
+          this.$forceUpdate();
+        }.bind(this)
+      });
+    },
+    "item.time": function(newValue) {
+      this.ageHuman = moment(newValue).fromNow();
+    }
+  }
 };

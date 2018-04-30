@@ -1,5 +1,4 @@
 // import modules
-import moment from "moment";
 import Vue from "vue";
 import TopBar from "./TopBar.vue";
 import NewsItem from "./NewsItem.vue";
@@ -14,48 +13,6 @@ firebase.initializeApp({
 // initialize the database
 window.db = firebase.database().ref("v0");
 
-// make libraries available
-Vue.prototype.moment = moment;
-
-window.extractHostname = function(url) {
-  var hostname;
-  //find & remove protocol (http, ftp, etc.) and get hostname
-
-  if (url.indexOf("://") > -1) {
-    hostname = url.split("/")[2];
-  } else {
-    hostname = url.split("/")[0];
-  }
-
-  //find & remove port number
-  hostname = hostname.split(":")[0];
-  //find & remove "?"
-  hostname = hostname.split("?")[0];
-
-  return hostname;
-};
-
-// https://stackoverflow.com/questions/8498592/extract-hostname-name-from-string
-window.extractRootDomain = function(url) {
-  var domain = window.extractHostname(url),
-    splitArr = domain.split("."),
-    arrLen = splitArr.length;
-
-  //extracting the root domain here
-  //if there is a subdomain
-  if (arrLen > 2) {
-    domain = splitArr[arrLen - 2] + "." + splitArr[arrLen - 1];
-    //check to see if it's using a Country Code Top Level Domain (ccTLD) (i.e. ".me.uk")
-    if (splitArr[arrLen - 2].length == 2 && splitArr[arrLen - 1].length == 2) {
-      //this is using a ccTLD
-      domain = splitArr[arrLen - 3] + "." + domain;
-    }
-  }
-  return domain;
-};
-
-Vue.prototype.extractRootDomain = window.extractRootDomain;
-
 // define the components
 Vue.component("TopBar", TopBar);
 Vue.component("spacer", {
@@ -64,6 +21,7 @@ Vue.component("spacer", {
 Vue.component("news-item", NewsItem);
 Vue.component("Footer", FooterBar);
 
+// create the application
 window.App = new Vue({
   el: "#app",
   data: {
@@ -71,6 +29,7 @@ window.App = new Vue({
   }
 });
 
+// create the hooks for firebase updates
 window.bestStoriesUpdated = function(stories) {
   stories = stories.slice(0, 30);
 
@@ -94,6 +53,7 @@ window.bestStoriesUpdated = function(stories) {
   }
 };
 
+// subscribe to updates on the top stories link
 window.db
   .child("topstories")
   .on("value", best => bestStoriesUpdated(best.val()));

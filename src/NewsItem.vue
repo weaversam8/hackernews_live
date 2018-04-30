@@ -14,10 +14,7 @@
       </td>
       <td class='title'>
         <a :href='item.href' class='storylink'>{{item.title}}</a>
-        <span v-if='!item.text' class='sitebit comhead'> (
-          <a :href='"from?site=" + extractRootDomain(item.href)'>
-            <span class='sitestr'>{{extractRootDomain(item.href)}}</span>
-          </a>)</span>
+        <span v-if='!item.text' class='sitebit comhead'> (<a :href='"from?site=" + domain'><span class='sitestr'>{{domain}}</span></a>)</span>
       </td>
     </tr>
     <!-- Item comment line -->
@@ -27,7 +24,7 @@
         <span v-if='item.story' class='score' :id='"score_" + item.id'>{{item.pointCount}} points by </span>
         <a v-if='item.story' :href='"user?id= " + item.username' class='hnuser'>{{item.username}}</a>
         <span class='age'>
-          <a :href='"item?id= " + item.id'> {{moment(item.time).from(moment())}}</a>
+          <a :href='"item?id=" + item.id'> {{ageHuman}}</a>
         </span>
         <span :id='"unv_ " + item.id'></span> |
         <a href='#'>flag</a> |
@@ -36,7 +33,7 @@
       </td>
       <td class='subtext' v-if='!item.story'>
         <span class='age'>
-          <a :href='"item?id= " + item.id'> {{moment(item.time).from(moment())}} | </a>
+          <a :href='"item?id=" + item.id'> {{ageHuman}} | </a>
         </span>
         <a href='#' onclick='return'>hide</a>
       </td>
