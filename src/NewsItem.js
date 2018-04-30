@@ -38,7 +38,7 @@ const newsLoadFunction = function() {
 
   console.log("Story #" + this.item.id + " is now listening for updates.");
 
-  window.db
+  this.db
     .child("item")
     .child(this.item.id)
     .on("value", storyUpdateFunction.bind(this));
@@ -54,14 +54,14 @@ const newsUnloadFunction = function() {
     "Story #" + this.item.id + " is no longer listening for updates."
   );
 
-  window.db
+  this.db
     .child("item")
     .child(this.item.id)
     .off("value", storyUpdateFunction.bind(this));
 };
 
 export default {
-  props: ["item", "index"],
+  props: ["db", "item", "index"],
   created: newsLoadFunction,
   beforeDestroy: newsUnloadFunction,
   computed: {
