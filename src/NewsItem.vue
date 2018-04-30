@@ -8,7 +8,7 @@
       <td valign='top' class='votelinks'>
         <center>
           <a :id='"up_" + item.id' onclick='return alert(\"Voting not currently supported.\")' href='#'>
-            <div class='votearrow' title='upvote'></div>
+            <div class='votearrow' title='upvote' v-bind:style="{ filter: 'grayscale(' + grayscale + ')' }"></div>
           </a>
         </center>
       </td>
@@ -32,7 +32,7 @@
         <span :id='"unv_ " + item.id'></span> |
         <a href='#'>flag</a> |
         <a href='#' onclick='return'>hide</a> |
-        <a :href='"item?id=" + item.id'>{{item.commentText}}</a>
+        <a :href='"item?id=" + item.id' v-bind:style='{ color:"#ff9900", fontWeight:"bold", filter:"grayscale(" + grayscaleComments + ")" }'>{{item.commentText}}</a>
       </td>
       <td class='subtext' v-if='!item.story'>
         <span class='age'>
