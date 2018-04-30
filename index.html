@@ -12,112 +12,28 @@
     <center>
         <div id="app">
             <table id="hnmain" border="0" cellpadding="0" cellspacing="0" width="85%" bgcolor="#f6f6ef">
-                <!-- Top Bar -->
-                <tr>
-                    <td bgcolor="#ff6600">
-                        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="padding:2px">
-                            <tr>
-                                <!-- Logo -->
-                                <td style="width:18px;padding-right:4px">
-                                    <a href="https://news.ycombinator.com">
-                                        <img src="https://news.ycombinator.com/y18.gif" width="18" height="18" style="border:1px white solid;">
-                                    </a>
-                                </td>
-                                <!-- Menubar -->
-                                <td style="line-height:12pt; height:10px;">
-                                    <span class="pagetop">
-                                        <b class="hnname">
-                                            <a href="/">Hacker News
-                                            </a>
-                                            <a href="https://github.com/weaversam8/hackernews_live">
-                                                <u>Live</u>
-                                            </a>
-                                        </b>
-                                        <!-- <a href="newest">new</a> |
-                                        <a href="newcomments">comments</a> |
-                                        <a href="show">show</a> |
-                                        <a href="ask">ask</a> |
-                                        <a href="jobs">jobs</a> |
-                                        <a href="submit">submit</a> -->
-                                    </span>
-                                </td>
-                                <!-- Login link -->
-                                <td style="text-align:right;padding-right:4px;">
-                                    <span class="pagetop">
-                                        <a href="#">login unsupported</a>
-                                    </span>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr style="height:10px"></tr>
-                <!-- News entries -->
-                <tr>
-                    <td>
-                        <transition-group name="news-list" tag="table" border="0" cellpadding="0" cellspacing="0" class="itemlist">
-                            <news-item v-for="(item, index) in items" v-bind:item="item" v-bind:index="index" v-bind:key="item.id"></news-item>
-                            <tr class="morespace" style="height:10px"></tr>
-                            <tr>
-                                <td colspan="2"></td>
-                                <td class="title">
-                                    <a href="news?p=2" class="morelink" rel="nofollow">More</a>
-                                </td>
-                            </tr>
-                        </transition-group>
-                    </td>
-                </tr>
-                <!-- Footer -->
-                <tr>
-                    <td>
-                        <img src="s.gif" height="10" width="0">
-                        <table width="100%" cellspacing="0" cellpadding="1">
-                            <tr>
-                                <td bgcolor="#ff6600"></td>
-                            </tr>
-                        </table>
-                        <br>
-                        <center>
-                            <span class="yclinks">
-                                <a href="https://news.ycombinator.com/newsguidelines.html">Guidelines</a>
-                                |
-                                <a href="https://news.ycombinator.com/newsfaq.html">FAQ</a>
-                                |
-                                <a href="mailto:hn@ycombinator.com">Support</a>
-                                |
-                                <a href="https://github.com/HackerNews/API">API</a>
-                                |
-                                <a href="https://news.ycombinator.com/security.html">Security</a>
-                                |
-                                <a href="lists">Lists</a>
-                                |
-                                <a href="https://news.ycombinator.com/bookmarklet.html" rel="nofollow">Bookmarklet</a>
-                                |
-                                <a href="http://www.ycombinator.com/legal/">Legal</a>
-                                |
-                                <a href="http://www.ycombinator.com/apply/">Apply to YC</a>
-                                |
-                                <a href="mailto:hn@ycombinator.com">Contact</a>
-                            </span>
-                            <br>
-                            <br>
-                            <span class="yclinks">
-                                This project is not affilliated with YCombinator. Unapologetically based off of
-                                <a href="https://news.ycombinator.com">
-                                    <u>Hacker News</u>
-                                </a>. Source code available
-                                <a href="https://github.com/weaversam8/hackernews_live">
-                                    <u>here</u>
-                                </a>.
-                            </span>
-                            <br>
-                            <br>
-                            <form method="get" action="//hn.algolia.com/">Search:
-                                <input type="text" name="q" value="" size="17" autocorrect="off" spellcheck="false" autocapitalize="off" autocomplete="false">
-                            </form>
-                        </center>
-                    </td>
-                </tr>
+                <tbody>
+                    <!-- Top Bar -->
+                    <tr is="TopBar"></tr>
+                    <tr is="spacer"></tr>
+                    <!-- News entries -->
+                    <tr>
+                        <td>
+                            <transition-group name="news-list" tag="table" border="0" cellpadding="0" cellspacing="0" class="itemlist">
+                                <news-item v-for="(item, index) in items" v-bind:item="item" v-bind:index="index" v-bind:key="item.id"></news-item>
+                                <tr class="morespace" style="height:10px"></tr>
+                                <tr>
+                                    <td colspan="2"></td>
+                                    <td class="title">
+                                        <a href="news?p=2" class="morelink" rel="nofollow">More</a>
+                                    </td>
+                                </tr>
+                            </transition-group>
+                        </td>
+                    </tr>
+                    <!-- Footer -->
+                    <tr is="Footer"></tr>
+                </tbody>
             </table>
         </div>
     </center>

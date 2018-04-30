@@ -1,7 +1,9 @@
 // import modules
 import moment from "moment";
 import Vue from "vue";
+import TopBar from "./TopBar.vue";
 import NewsItem from "./NewsItem.vue";
+import FooterBar from "./FooterBar.vue";
 import * as firebase from "firebase";
 
 // initialize the firebase app
@@ -54,8 +56,13 @@ window.extractRootDomain = function(url) {
 
 Vue.prototype.extractRootDomain = window.extractRootDomain;
 
-// define the component for a news item
+// define the components
+Vue.component("TopBar", TopBar);
+Vue.component("spacer", {
+  template: "<tr style='height:10px'></tr>"
+});
 Vue.component("news-item", NewsItem);
+Vue.component("Footer", FooterBar);
 
 window.App = new Vue({
   el: "#app",
